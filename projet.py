@@ -29,3 +29,8 @@ plt.show()
 #Affichage des données avec seaborn
 # sns.regplot(x='lat', y='lon', data=df)
 # plt.show()
+
+
+#---------------------------------------------
+#Cartes des séismes dans le monde
+#---------------------------------------------
