@@ -17,7 +17,10 @@ import numpy as np
 df = pd.read_csv('seismes_2014(1).csv', sep=',')
 
 #Affichage des données
-print(df)
+#print(df)
+
+print("Nombre de séisme en 2014 : %d" %len(df))
+print(df['pays'].value_counts()[:20])
 
 instant = np.array(df['lat'])
 pays = np.array(df['lon'])
