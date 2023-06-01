@@ -4,24 +4,28 @@
 import pandas as pd
 import pylab as plt
 import seaborn as sns
+import numpy as np
 
 # instant : date du séisme
 # lat : latitude du séisme
-# long : longitude du séisme
+# lon : longitude du séisme
 # profondeur : profondeur du séisme
 # mag : magnitude du séisme
 # pays : région du séisme
 
 #Lecture du fichier csv
-df = pd.read_csv('seismes_2014(1).csv', sep=';')
+df = pd.read_csv('seismes_2014(1).csv', sep=',')
 
 #Affichage des données
 print(df)
 
+instant = np.array(df['lat'])
+pays = np.array(df['lon'])
+
 #Affichage des données avec pylab
-plt.plot(df['x'], df['y'], 'ro')
+plt.plot(instant, pays, 'ro')
 plt.show()
 
 #Affichage des données avec seaborn
-sns.regplot(x='x', y='y', data=df)
-plt.show()
+# sns.regplot(x='lat', y='lon', data=df)
+# plt.show()
