@@ -5,6 +5,10 @@ import pandas as pd
 import pylab as plt
 import seaborn as sns
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.patches import Polygon
 
 # instant : date du séisme
 # lat : latitude du séisme
@@ -35,22 +39,36 @@ for pays in nom:
 print(nom)
 print("hello",mag)
 
-instant = np.array(df['lat'])
-pays = np.array(df['lon'])
 
-#Affichage des données avec pylab
-plt.plot(instant, pays, 'ro')
-plt.show()
 
-#afficher les 20 pays avec leur magnitudes
-
-#afficher les boites à moustaches des 20 pays
-sns.boxplot(mag)
+# Q4 20 pays avec leur magnitudes
+sns.boxplot(mag,whis=100)
 plt.gca().xaxis.set_ticklabels(nom)
-plt.gca().yaxis.set_label("mag")
+plt.xlabel("pays")
+plt.ylabel("magnitude")
 locs, labels = plt.xticks()
 plt.setp(labels, rotation=90)
 plt.show()
+
+# Magnitudes
+
+maxMag = df.sort_values(by='mag',ascending = False)['pays'].unique()[:6]
+print("6 pays avec les plus fortes magnitudes :",maxMag)
+
+magCalifornia = df[(df['pays']=='California') & (df['mag'] <= 2)].shape[0]
+magAlaska = df[(df['pays']=='Alaska') & (df['mag'] <= 2)].shape[0]
+print("Nombre de séisme Californie :",magCalifornia)
+print("Nombre de séisme Alaska :",magAlaska)
+
+magAlaCali = df[((df['pays']=='Alaska') | (df['pays']=='California')) & (df['mag'] <= 2)].shape[0]
+print("Nombre de séisme Ala + cali :",magAlaCali)
+
+# instant = np.array(df['lat'])
+# pays = np.array(df['lon'])
+
+#Affichage des données avec pylab
+# plt.plot(instant, pays, 'ro')
+# plt.show()
 
 #Affichage des données avec seaborn
 # sns.regplot(x='lat', y='lon', data=df)
