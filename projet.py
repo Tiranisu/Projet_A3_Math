@@ -51,7 +51,17 @@ import chart_studio
 import chart_studio.plotly as py
 chart_studio.tools.set_credentials_file(username='tiranisu', api_key='pk.eyJ1IjoidGlyYW5pc3UiLCJhIjoiY2xpY3dtOGU3MDI2cjNobWk2dGR6c2M4dyJ9.glFr_ld9NLZhLQ3gGhzsXg')
 
-fig = px.scatter_mapbox(F, lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], color="m", zoom=1)
+#creer un dictionnaire
+palette = {3 : "hotpink", 
+           4 : "green", 
+           5 : "chocolate", 
+           6 : "blue", 
+           7 : "red", 
+           8 : "black"}
+
+F["couleur"]=F["m"].map(palette)
+
+fig = px.scatter_mapbox(F, lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1, color="couleur")
 
 fig.update_layout(mapbox_style="open-street-map")
 
