@@ -50,7 +50,7 @@ mag = []
 for pays in nom:
     magn = df[df['pays'] == pays]['mag'].tolist()
     mag.append(magn)
-    print(pays, mag)
+    # print(pays, mag)
 
 # print(nom)
 # print(mag)
@@ -86,36 +86,6 @@ print("Nombre de séisme Ala + cali :",magAlaCali)
 #----------------- Partie II -----------------#
 #                                             #
 #---------------------------------------------#
-
-
-
-#---------------------------------------------#
-#                                             #
-#----------------- Partie III ----------------#
-#                                             #
-#---------------------------------------------#
-
-
-
-#---------------------------------------------#
-#                                             #
-#----------------- Partie IV -----------------#
-#                                             #
-#---------------------------------------------#
-
-#------------------ Notes ---------------------
-
-# instant = np.array(df['lat'])
-# pays = np.array(df['lon'])
-
-#Affichage des données avec pylab
-# plt.plot(instant, pays, 'ro')
-# plt.show()
-
-#Affichage des données avec seaborn
-# sns.regplot(x='lat', y='lon', data=df)
-# plt.show()
-
 
 #---------------------------------------------
 #Cartes des séismes dans le monde
@@ -162,3 +132,30 @@ fig2.update_layout(mapbox_style="open-street-map")
 fig2.add_trace(fig.data[0])
 
 fig2.show()
+
+#---------------------------------------------#
+#                                             #
+#----------------- Partie III ----------------#
+#                                             #
+#---------------------------------------------#
+
+
+
+#---------------------------------------------#
+#                                             #
+#----------------- Partie IV -----------------#
+#                                             #
+#---------------------------------------------#
+
+#------------------ Notes ---------------------
+
+# instant = np.array(df['lat'])
+# pays = np.array(df['lon'])
+
+#Affichage des données avec pylab
+# plt.plot(instant, pays, 'ro')
+# plt.show()
+
+#Affichage des données avec seaborn
+# sns.regplot(x='lat', y='lon', data=df)
+# plt.show()
