@@ -1,14 +1,12 @@
-#Lire un fichier csv et afficher les données avec pandas, pylab et seabornù
-
+# ---------------------------------------------
 
 import pandas as pd
 import pylab as plt
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.patches import Polygon
+
+# ----------------- Variables -----------------
 
 # instant : date du séisme
 # lat : latitude du séisme
@@ -17,16 +15,28 @@ from matplotlib.patches import Polygon
 # mag : magnitude du séisme
 # pays : région du séisme
 
+#-------------------- Q1 ----------------------
+
+#----------- Traitement de la DB  -------------
+
 #Lecture du fichier csv
 df = pd.read_csv('seismes_2014(1).csv', sep=',')
 
 #Affichage des données
 #print(df)
 
+#-------------------- Q2 ----------------------
+
 print("Nombre de séisme en 2014 : %d" %len(df))
 print(df['pays'].value_counts()[:20])
 
-nom = df['pays'].value_counts()[:20].index
+#-------------------- Q3 ----------------------
+
+table = df['pays'].value_counts()[:20]
+
+nom = table.index.tolist()
+
+#------------------- Q4 -----------------------
 
 mag = []
 
@@ -35,13 +45,11 @@ for pays in nom:
     mag.append(magn)
     print(pays, mag)
 
+# print(nom)
+# print(mag)
 
-print(nom)
-print("hello",mag)
+# Affichage des données avec seaborn & pylab
 
-
-
-# Q4 20 pays avec leur magnitudes
 sns.boxplot(mag,whis=100)
 plt.gca().xaxis.set_ticklabels(nom)
 plt.xlabel("pays")
@@ -50,10 +58,12 @@ locs, labels = plt.xticks()
 plt.setp(labels, rotation=90)
 plt.show()
 
-# Magnitudes
+# 6 pays avec les plus fortes magnitudes
 
 maxMag = df.sort_values(by='mag',ascending = False)['pays'].unique()[:6]
 print("6 pays avec les plus fortes magnitudes :",maxMag)
+
+# Séisme de magnitude inférieure ou égale à 2 en Californie et en Alaska
 
 magCalifornia = df[(df['pays']=='California') & (df['mag'] <= 2)].shape[0]
 magAlaska = df[(df['pays']=='Alaska') & (df['mag'] <= 2)].shape[0]
