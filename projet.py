@@ -15,7 +15,7 @@ import numpy as np
 
 #Lecture du fichier csv
 df = pd.read_csv('seismes_2014(1).csv', sep=',')
-
+df[df['mag'].isnull()]
 #Affichage des données
 # print(df)
 
@@ -37,12 +37,13 @@ df = pd.read_csv('seismes_2014(1).csv', sep=',')
 #1.
 F = pd.DataFrame()
 #contenant une magnitude superieur a 3
-F = df[df['mag'] > 3]
+F = df[df['mag'] >= 3]
 #ajouter colonne nommée m avec les entiers des magnitudes
 F['m'] = F['mag'].astype(int)
 #afficher la taille de F
 # print(F.shape)
 # print(F)
+
 
 from datetime import datetime, timedelta
 import plotly.express as px
@@ -59,11 +60,23 @@ palette = {3 : "hotpink",
            7 : "red", 
            8 : "black"}
 
-F["couleur"]=F["m"].map(palette)
 
-fig = px.scatter_mapbox(F, lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1, color="couleur")
+fig = px.density_mapbox(F[F['m'] < 5], lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1)
+
+
+G = df[df['mag'] >= 5]
+G['m'] = G['mag'].astype(int)
+G['size'] = 10 + 10*(G['m'] - 5)
+print(G)
+
+fig.add_trace(px.scatter_mapbox(G, lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1, color_continuous_scale=list(palette.values()), size="size").data[0])
 
 fig.update_layout(mapbox_style="open-street-map")
+
+#representer l'épicentre des points
+
+
+
 
 fig.show()
 
