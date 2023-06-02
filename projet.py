@@ -69,14 +69,10 @@ G['m'] = G['mag'].astype(int)
 G['size'] = 10 + 10*(G['m'] - 5)
 print(G)
 
-fig.add_trace(px.scatter_mapbox(G, lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1, color_continuous_scale=list(palette.values()), size="size").data[0])
+fig2 = px.scatter_mapbox(G, lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1, color='m', color_continuous_scale=['hotpink', 'green', 'chocolate', 'blue', 'red', 'black'], size="size")
 
-fig.update_layout(mapbox_style="open-street-map")
+fig2.update_layout(mapbox_style="open-street-map")
 
-#representer l'épicentre des points
+fig2.add_trace(fig.data[0])
 
-
-
-
-fig.show()
-
+fig2.show()
