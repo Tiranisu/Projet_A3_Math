@@ -117,7 +117,7 @@ palette = {3 : "hotpink",
            8 : "black"}
 
 
-fig = px.density_mapbox(F[F['m'] < 5], lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1)
+fig = px.density_mapbox(F[F['m'] < 5], lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1, radius=10)
 
 
 G = df[df['mag'] >= 5]
@@ -125,12 +125,12 @@ G['m'] = G['mag'].astype(int)
 G['size'] = 10 + 10*(G['m'] - 5)
 print(G)
 
-fig2 = px.scatter_mapbox(G, lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1, color='m', color_continuous_scale=['hotpink', 'green', 'chocolate', 'blue', 'red', 'black'], size="size")
+fig2 = px.scatter_mapbox(G, lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1, color='m', color_continuous_scale=['chocolate', 'blue', 'red', 'black'], size="size")
 
+fig.update_layout(mapbox_style="open-street-map")
 fig2.update_layout(mapbox_style="open-street-map")
 
-fig2.add_trace(fig.data[0])
-
+fig.show()
 fig2.show()
 
 #---------------------------------------------#
