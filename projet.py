@@ -57,13 +57,13 @@ for pays in nom:
 
 # Affichage des données avec seaborn & pylab
 
-sns.boxplot(mag,whis=100)
-plt.gca().xaxis.set_ticklabels(nom)
-plt.xlabel("pays")
-plt.ylabel("magnitude")
-locs, labels = plt.xticks()
-plt.setp(labels, rotation=90)
-plt.show()
+# sns.boxplot(mag,whis=100)
+# plt.gca().xaxis.set_ticklabels(nom)
+# plt.xlabel("pays")
+# plt.ylabel("magnitude")
+# locs, labels = plt.xticks()
+# plt.setp(labels, rotation=90)
+# plt.show()
 
 
 # 6 pays avec les plus fortes magnitudes
@@ -130,8 +130,8 @@ fig2 = px.scatter_mapbox(G, lat="lat", lon="lon", hover_name="pays", hover_data=
 fig.update_layout(mapbox_style="open-street-map")
 fig2.update_layout(mapbox_style="open-street-map")
 
-fig.show()
-fig2.show()
+# fig.show()
+# fig2.show()
 
 #---------------------------------------------#
 #                                             #
@@ -139,7 +139,37 @@ fig2.show()
 #                                             #
 #---------------------------------------------#
 
-#test
+#-------------------- Q1 ----------------------
+
+E = F['m'].value_counts()
+
+print(E)
+
+#-------------------- Q2 ----------------------
+
+# figM = px.density_mapbox(F[F['m'] >= 7], lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1, radius=10)
+
+H = df[df['mag'] >= 3]
+H['m'] = H['mag'].astype(int)
+
+H['size'] = 5*(H['m'])
+H = H.sort_values(by='m',ascending = True)
+
+H['m'] = H['m'].astype(str)
+
+print("hello",H['m'])
+
+# figM = px.scatter_geo(H, lat="lat", lon="lon",
+#                      hover_name="pays", size='size',
+#                      projection="natural earth", color='m', color_discrete_sequence=["hotpink","green"'chocolate', 'blue', 'red','black'],labels={"m": "Magnitude"})
+
+figM = px.scatter_geo(H, lat="lat", lon="lon",
+                     hover_name="pays", size='size',
+                     projection="natural earth", color='m', labels={"m": "Magnitude"},color_discrete_sequence=list(palette.values()))
+
+figM.update_layout(mapbox_style="open-street-map")
+
+figM.show()
 
 #---------------------------------------------#
 #                                             #
