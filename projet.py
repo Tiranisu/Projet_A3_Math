@@ -152,7 +152,7 @@ print(E)
 H = df[df['mag'] >= 3]
 H['m'] = H['mag'].astype(int)
 
-H['size'] = 5*(H['m'])
+H['size'] = 10*(H['m']-2)
 H = H.sort_values(by='m',ascending = True)
 
 H['m'] = H['m'].astype(str)
@@ -163,13 +163,19 @@ print("hello",H['m'])
 #                      hover_name="pays", size='size',
 #                      projection="natural earth", color='m', color_discrete_sequence=["hotpink","green"'chocolate', 'blue', 'red','black'],labels={"m": "Magnitude"})
 
-figM = px.scatter_geo(H, lat="lat", lon="lon",
+fig3 = px.scatter_geo(H, lat="lat", lon="lon",
                      hover_name="pays", size='size',
                      projection="natural earth", color='m', labels={"m": "Magnitude"},color_discrete_sequence=list(palette.values()))
 
-figM.update_layout(mapbox_style="open-street-map")
+# fig3.update_layout(mapbox_style="open-street-map")
 
-figM.show()
+fig3.show()
+
+# fig4 = px.pie(df, values='pop', names='country', title='Population of European continent')
+
+# fig4.update_layout(mapbox_style="open-street-map")
+
+# fig4.show()
 
 #---------------------------------------------#
 #                                             #
