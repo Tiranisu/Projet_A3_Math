@@ -106,6 +106,8 @@ import plotly.express as px
 
 import chart_studio
 import chart_studio.plotly as py
+import plotly.graph_objects as go
+
 chart_studio.tools.set_credentials_file(username='tiranisu', api_key='pk.eyJ1IjoidGlyYW5pc3UiLCJhIjoiY2xpY3dtOGU3MDI2cjNobWk2dGR6c2M4dyJ9.glFr_ld9NLZhLQ3gGhzsXg')
 
 #creer un dictionnaire
@@ -123,7 +125,7 @@ fig = px.density_mapbox(F[F['m'] < 5], lat="lat", lon="lon", hover_name="pays", 
 G = df[df['mag'] >= 5]
 G['m'] = G['mag'].astype(int)
 G['size'] = 10 + 10*(G['m'] - 5)
-print(G)
+# print(G)
 
 fig2 = px.scatter_mapbox(G, lat="lat", lon="lon", hover_name="pays", hover_data=["mag"], zoom=1, color='m', color_continuous_scale=['chocolate', 'blue', 'red', 'black'], size="size")
 
@@ -141,9 +143,21 @@ fig2.update_layout(mapbox_style="open-street-map")
 
 #-------------------- Q1 ----------------------
 
-E = F['m'].value_counts()
+E = pd.DataFrame()
 
+E['effectif'] = F['m'].value_counts()
+
+E['values'] = E.values
+
+E['index'] = E.index
+
+E['effectif'] = E.values/len(F)*100
+
+E = E.sort_values(by='index',ascending = True)
+
+print("Effectif de chaque magnitude :")
 print(E)
+print("FIN")
 
 #-------------------- Q2 ----------------------
 
@@ -157,7 +171,7 @@ H = H.sort_values(by='m',ascending = True)
 
 H['m'] = H['m'].astype(str)
 
-print("hello",H['m'])
+# print("hello",H['m'])
 
 # figM = px.scatter_geo(H, lat="lat", lon="lon",
 #                      hover_name="pays", size='size',
@@ -167,15 +181,28 @@ fig3 = px.scatter_geo(H, lat="lat", lon="lon",
                      hover_name="pays", size='size',
                      projection="natural earth", color='m', labels={"m": "Magnitude"},color_discrete_sequence=list(palette.values()))
 
-# fig3.update_layout(mapbox_style="open-street-map")
+fig3.update_layout(title='Séisme en 2014 selon leur magnitude', title_x=0.5)
 
-fig3.show()
+# fig3.show()
 
-# fig4 = px.pie(df, values='pop', names='country', title='Population of European continent')
+fig4 = px.pie(E, values='effectif', names="index", color_discrete_sequence=list(palette.values()))
 
-# fig4.update_layout(mapbox_style="open-street-map")
+fig4.update_layout(
+            title={
+            'text' : 'Répartition',
+            'x':0.5,
+            'xanchor': 'center'
+        })
 
-# fig4.show()
+fig4.show()
+
+#associate fig3 and fig4
+# fig3.add_trace(fig4.data[0])
+# fig3.show()
+
+# fig3.add_trace(fig4.data[0])
+
+# fig3.show()
 
 #---------------------------------------------#
 #                                             #
