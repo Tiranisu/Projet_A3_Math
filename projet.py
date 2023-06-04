@@ -211,18 +211,3 @@ fig_final.show()
 #----------------- Partie IV -----------------#
 #                                             #
 #---------------------------------------------#
-
-
-
-#------------------ Notes ---------------------
-
-# instant = np.array(df['lat'])
-# pays = np.array(df['lon'])
-
-#Affichage des données avec pylab
-# plt.plot(instant, pays, 'ro')
-# plt.show()
-
-#Affichage des données avec seaborn
-# sns.regplot(x='lat', y='lon', data=df)
-# plt.show()
