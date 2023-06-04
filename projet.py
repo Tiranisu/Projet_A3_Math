@@ -217,60 +217,44 @@ fig_final = go.Figure()
 fig_pie = go.Pie(
     labels=E["index"],
     values=E['values'],
-    domain={'x': [0, 0.4], 'y': [0.8, 1]},
+    domain={'x': [0, 0.1], 'y': [0.8, 1]},
     marker_colors=list(palette.values()),
-    legendgroup='markers',  # Assignation du même legendgroup pour le trace principal
+    legendgroup='magnitude',  # Assignation du même legendgroup pour le trace principal
     title="Répartition",
-    name="magnitude"
+    name="magnitude",
+    showlegend=False
     )
 
-print("hello maxence",E)
+for i in range(3, 9):
+    # Création d'une trace Scattergeo pour chaque valeur de m
+    trace_temp = go.Scattergeo(
+        lat=Q[Q['m'] == i]['lat'],
+        lon=Q[Q['m'] == i]['lon'],
+        mode='markers',
+        marker=dict(
+            size=Q[Q['m'] == i]['size'],
+            color=['hotpink', 'green', 'chocolate', 'blue', 'red', 'black'][i-3],
+            line=dict(width=0.5, color='white'),
+        ),
+        hoverinfo='none',  # Pas de texte de survol
+        name=str(i),
+        
+    )
+    fig_final.add_trace(trace_temp)  # Ajout de la trace à la figure
 
-fig_map = go.Scattergeo(
-    lat=Q['lat'],
-    lon=Q['lon'],
-    mode='markers',
-    marker=dict(
-        size=Q['size'],
-        color=couleurs,
-        line=dict(width=0.5, color='white')
-    ),
-    legendgroup='markers',  # Assignation du même legendgroup pour le trace principal
-    name="magnitude"
-)
-
-# for i in range(3, 9):
-#     # Création d'une trace Scattergeo pour chaque valeur de m
-#     trace_temp = go.Scattergeo(
-#         lat=F[F['m'] == i]['lat'],
-#         lon=F[F['m'] == i]['lon'],
-#         mode='markers',
-#         marker=dict(
-#             size=[5 + 5 * (i - 2)],
-#             color=['hotpink', 'green', 'chocolate', 'blue', 'red', 'black'][i - 3],
-#             line=dict(width=0.5, color='white')
-#         ),
-#         hoverinfo='none',  # Pas de texte de survol
-#         name="m = " + str(i)
-#     )
-
-fig_final.add_trace(fig_map)
 fig_final.add_trace(fig_pie)
 
-# fig_final.update_traces(hoverinfo='label+percent', textfont_size=20,
-#                   marker=dict(colors=colors))
+fig_final.update_geos(
+    projection_type="natural earth",
+)
 
-# fig_final.update_layout(
-#         title = 'Séisme en 2014 selon leur magnitude',
-#         geo_scope='world',
-#     )
-
-fig_final.update_geos(projection_type="natural earth")
 fig_final.update_layout(
     height=700,
     margin={"r": 0, "t": 0, "l": 0, "b": 0},
     dragmode=False,
     title = 'Séisme en 2014 selon leur magnitude',
+    title_x=0.5,
+    legend=dict(title="Magnitude")
 )
 
 #---------------------------------------------#
