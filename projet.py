@@ -204,7 +204,7 @@ fig_final.update_layout(
     legend=dict(title="Magnitude")
 )
 
-fig_final.show()
+# fig_final.show()
 
 #---------------------------------------------#
 #                                             #
