@@ -229,4 +229,26 @@ fig_final.update_layout(
 nbr = 70
 
 table = df['pays'].value_counts()[len(df['pays'].value_counts())-nbr:]
-print(table)
+
+V = pd.DataFrame()
+V['Hcount'] = df['pays'].value_counts()
+V = V[V['Hcount'] >= 30]
+print(V.index.tolist())
+
+country_list = ['California', 'Alaska', 'Oregon', 'Nevada', 'Washington', 'Hawaii', 'PuertoRico', 'Indonesia', 'Oklahoma', 'Montana', 'Utah', 'PapuaNewGuinea', 'Chile', 'Japan', 'Kansas', 'Wyoming', 'Canada', 'NewZealand', 'Philippines', 'Mexico', 'Fiji', 'SolomonIslands', 'BritishVirginIslands', 'Tonga', 'Idaho', 'Iceland', 'Russia', 'NorthernMarianaIslands', 'Vanuatu', 'SouthoftheFijiIslands', 'Greece', 'Iran', 'DominicanRepublic', 'India', 'China', 'U.S.VirginIslands', 'Peru', 'Argentina', 'Guatemala', 'northernAlaska', 'Tennessee', 'Afghanistan', 'Nicaragua', 'Missouri', 'NorthernMid-AtlanticRidge', 'Arkansas', 'Guam', 'CA', 'Colombia', 'CentralAlaska', 'CarlsbergRidge', 'Taiwan', 'SouthSandwichIslands', 'ElSalvador', 'NorthernCalifornia', 'Turkey', 'Mid-IndianRidge', 'NewCaledonia', 'SouthernAlaska', 'CentralMid-AtlanticRidge', 'Tajikistan', 'EastTimor', 'Japanregion', 'ReykjanesRidge', 'Arizona', 'WallisandFutuna', 'Pacific-AntarcticRidge', 'Burma', 'KurilIslands', 'Ecuador', 'CentralCalifornia', 'Pakistan', 'WesternIndian-AntarcticRidge', 'Texas', 'Panama', 'SouthernEastPacificRise', 'BallenyIslandsregion', 'FederatedStatesofMicronesiaregion', 'Micronesia', 'Colorado', 'SouthernMid-AtlanticRidge', 'SoutheastIndianRidge', 'NewMexico', 'CostaRica', 'Bolivia', 'CentralEastPacificRise', 'Fijiregion', 'Yemen', 'OffthewestcoastofnorthernSumatra', 'SouthofTonga', 'EasterIslandregion']
+
+coastal_regions = [
+    {'country': country, 'coastal': country in ['California', 'Alaska', 'Oregon', 'Washington', 'Hawaii', 'PuertoRico', 'BritishVirginIslands', 'Tonga', 'NorthernMarianaIslands', 'SouthoftheFijiIslands', 'Guam', 'NorthernCalifornia', 'CentralCalifornia', 'WallisandFutuna', 'BallenyIslandsregion', 'Micronesia', 'SouthernMid-AtlanticRidge', 'FederatedStatesofMicronesiaregion', 'SouthofTonga', 'EasterIslandregion']}
+    if country not in ['Indonesia', 'PapuaNewGuinea', 'Chile', 'Japan', 'Canada', 'NewZealand', 'Philippines', 'Mexico', 'SolomonIslands', 'Greece', 'Iran', 'DominicanRepublic', 'China', 'U.S.VirginIslands', 'Argentina', 'Guatemala', 'Tennessee', 'Afghanistan', 'Nicaragua', 'Missouri', 'NorthernMid-AtlanticRidge', 'Arkansas', 'CA', 'Colombia', 'CarlsbergRidge', 'Taiwan', 'SouthSandwichIslands', 'ElSalvador', 'Turkey', 'Mid-IndianRidge', 'NewCaledonia', 'CentralMid-AtlanticRidge', 'Tajikistan', 'EastTimor', 'Japanregion', 'ReykjanesRidge', 'Arizona', 'Pacific-AntarcticRidge', 'Burma', 'KurilIslands', 'Ecuador', 'Pakistan', 'WesternIndian-AntarcticRidge', 'Texas', 'Panama', 'SouthernEastPacificRise', 'CentralEastPacificRise', 'Fijiregion', 'Yemen', 'OffthewestcoastofnorthernSumatra', 'SouthernAlaska', 'SoutheastIndianRidge', 'NewMexico', 'CostaRica', 'Bolivia', 'NorthernCalifornia']
+    else
+        {'country': country, 'coastal': True}
+    for country in country_list
+]
+
+print('Costal : ',coastal_regions)
+
+V['coastal'] = [region['coastal'] for region in coastal_regions]
+
+area_list = ['423970','1717854','255026','286351','184824','28337','9104','1904569','181196','380800','220080','462840','755276','377975','213283','253338','9984670','268680','300400','1964375','18274','28450','153','747','216632','102775','17234033','477','12189','0','131957','1648195','48671','3287263','9596961','346','1285216','2780400','108889','207199','109247','652230','129494','180694','0','137732','549','0','1141748','642','0','35980','310','20742','0','783562','0','18575','0','0','143100','15410','0','0','295254','124','0','676578','10355','256370','0','881913','0','696241','75420','0','816','702','0','269837','0','0','315194','51100','1098581','0','0','527968','0','0','0']
+
+V['area'] = area_list
