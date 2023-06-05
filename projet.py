@@ -279,3 +279,15 @@ print("non_coastal : ",non_coastal.shape)
 
 coastal.to_csv('coastal.csv', index=True)
 non_coastal.to_csv('non_coastal.csv', index=True)
+
+magC = pd.DataFrame()
+magNC = pd.DataFrame()
+
+magC['effectif'] = coastal['mag'].value_counts()
+magNC['effectif'] = non_coastal['mag'].value_counts()
+
+magC = magC[magC.index >= 0]
+magNC = magNC[magNC.index >= 0]
+
+magC.to_csv('magC.csv', index=True)
+magNC.to_csv('magNC.csv', index=True)
