@@ -289,5 +289,20 @@ magNC['effectif'] = non_coastal['mag'].value_counts()
 magC = magC[magC.index >= 0]
 magNC = magNC[magNC.index >= 0]
 
+#sort by index
+magC = magC.sort_index()
+magNC = magNC.sort_index()
+
+print("magC : ",magC)
+print("magNC : ",magNC)
+
+magC['coastal'] = True
+magNC['coastal'] = False
+
+mag = pd.concat([magC, magNC])
+
+print("mag : ",mag)
+
 magC.to_csv('magC.csv', index=True)
 magNC.to_csv('magNC.csv', index=True)
+mag.to_csv('mag.csv', index=True)
