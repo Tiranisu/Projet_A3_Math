@@ -172,6 +172,9 @@ fig_pie = go.Pie(
     showlegend=False,
     name='Magnitude',
     hovertext='Effectif : ',
+    hoverinfo='label+value+percent+text',
+    textinfo='percent+label',
+    textposition='outside',
     )
 
 for i in range(3, 9):
