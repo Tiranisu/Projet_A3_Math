@@ -165,12 +165,13 @@ fig_final = go.Figure()
 fig_pie = go.Pie(
     labels=E['index'],
     values=E['effectif'],
-    domain={'x': [0, 0.1], 'y': [0.8, 1]},
+    domain={'x': [0, 0.2], 'y': [0.8, 1]},
     marker_colors=list(palette.values()),
     legendgroup='magnitude',  # Assignation du même legendgroup pour le trace principal
-    title="Répartition",
-    name="magnitude",
-    showlegend=False
+    title='Répartition',
+    showlegend=False,
+    name='Magnitude',
+    hovertext='Effectif : ',
     )
 
 for i in range(3, 9):
@@ -204,7 +205,7 @@ fig_final.update_layout(
     legend=dict(title="Magnitude")
 )
 
-# fig_final.show()
+fig_final.show()
 
 #---------------------------------------------#
 #                                             #
@@ -213,4 +214,3 @@ fig_final.update_layout(
 #---------------------------------------------#
 
 # voir fichier R
-
