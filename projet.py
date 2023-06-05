@@ -208,7 +208,7 @@ fig_final.update_layout(
     legend=dict(title="Magnitude")
 )
 
-fig_final.show()
+# fig_final.show()
 
 #---------------------------------------------#
 #                                             #
@@ -217,3 +217,16 @@ fig_final.show()
 #---------------------------------------------#
 
 # voir fichier R
+
+#---------------------------------------------#
+#                                             #
+#----------------- Partie V ------------------#
+#                                             #
+#---------------------------------------------#
+
+#afficher les 20 pays avec le moins de seisme
+
+nbr = 70
+
+table = df['pays'].value_counts()[len(df['pays'].value_counts())-nbr:]
+print(table)
