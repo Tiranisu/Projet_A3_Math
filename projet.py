@@ -296,8 +296,8 @@ magNC = magNC.sort_index()
 print("magC : ",magC)
 print("magNC : ",magNC)
 
-magC['coastal'] = True
-magNC['coastal'] = False
+magC['coastal'] = 1
+magNC['coastal'] = 0
 
 mag = pd.concat([magC, magNC])
 
