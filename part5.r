@@ -1,1 +1,5 @@
-print(11+2)
+
+
+mag <- read.csv("mag.csv")
+
+ggplot2
