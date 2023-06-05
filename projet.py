@@ -27,7 +27,12 @@ import matplotlib.pyplot as plt
 
 #Lecture du fichier csv
 df = pd.read_csv('seismes_2014(1).csv', sep=',')
+
+print("this is df : ",df)
+
 df[df['mag'].isnull()]
+
+print("this is df : ",df)
 #Affichage des données
 
 #print(df)
@@ -260,14 +265,17 @@ V.to_csv('V.csv', index=True)
 
 #creer une dataframe data avec les données de df pour les pays de coastal_list
 data = df[df['pays'].isin(country_list)]
+data[data['mag'].isnull()]
 
 coastal = df[df['pays'].isin(coastal_list)]
+coastal[coastal['mag'].isnull()]
 
 non_coastal= df[df['pays'].isin(non_coastal_list)]
+non_coastal[non_coastal['mag'].isnull()]
 
 print("data : ",data.shape)
-print("data1 : ",coastal.shape)
-print("data2 : ",non_coastal.shape)
+print("coastal : ",coastal.shape)
+print("non_coastal : ",non_coastal.shape)
 
 coastal.to_csv('coastal.csv', index=True)
 non_coastal.to_csv('non_coastal.csv', index=True)
