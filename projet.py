@@ -255,3 +255,6 @@ V['area'] = area_list
 
 # filtrer les pays avec une superficie égale à 0
 V = V[V['area'] != '0']
+
+# convertir V en fichier csv
+V.to_csv('V.csv', index=True)
