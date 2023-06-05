@@ -255,3 +255,19 @@ V = V[V['area'] != '0']
 
 # convertir V en fichier csv
 V.to_csv('V.csv', index=True)
+
+#---------------------------------------------
+
+#creer une dataframe data avec les données de df pour les pays de coastal_list
+data = df[df['pays'].isin(country_list)]
+
+coastal = df[df['pays'].isin(coastal_list)]
+
+non_coastal= df[df['pays'].isin(non_coastal_list)]
+
+print("data : ",data.shape)
+print("data1 : ",coastal.shape)
+print("data2 : ",non_coastal.shape)
+
+coastal.to_csv('coastal.csv', index=True)
+non_coastal.to_csv('non_coastal.csv', index=True)
