@@ -6,7 +6,7 @@ data <- read.csv("seismes_2014(1).csv")
 data2 <- read.csv("V.csv")
 mag <- read.csv("mag.csv")
 
-ggplot(mag, aes(x=mag, y=effectif, color=coastal))+ 
+ggplot(mag, aes(x=mag, y=effectif, color=Pays_Cotier))+ 
   geom_point()
 
 #ggplot(magC, aes(x=mag, y=effectif)) + 
