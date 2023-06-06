@@ -280,31 +280,66 @@ print("non_coastal : ",non_coastal.shape)
 coastal.to_csv('coastal.csv', index=True)
 non_coastal.to_csv('non_coastal.csv', index=True)
 
+#---------------------------------------------#
+
+magCEf = pd.DataFrame()
+magCEf['effectif'] = coastal['mag'].value_counts()
+magCEf['mag'] = magCEf.index.tolist()
+magCEf = magCEf[magCEf.index >= 0]
+magCEf = magCEf.sort_index()
+magCEf['Pays_Cotier'] = 'oui'
+magCEf.to_csv('magCEf.csv', index=True)
+
+#division de magC en 2 dataframes
+magCEf1 = pd.DataFrame()
+magCEf1['mag'] = magCEf['mag']
+magCEf1 = magCEf[magCEf1['mag'] <= 3.5]
+magCEf1.to_csv('magCEf1.csv', index=True)
+
+magCEf2 = pd.DataFrame()
+magCEf2['mag'] = magCEf['mag']
+magCEf2 = magCEf[magCEf2['mag'] > 3.5]
+magCEf2.to_csv('magCEf2.csv', index=True)
+
+
+
+#---------------------------------------------#
+
 magC = pd.DataFrame()
+magC['mag'] = coastal['mag']
+magC = magC[magC['mag'] >= 0]
+# print("magC : ",magC)
+magC.to_csv('magC.csv', index=True)
+
+#division de magC en 2 dataframes
+magC1 = pd.DataFrame()
+magC1['mag'] = magC['mag']
+magC1 = magC[magC1['mag'] <= 3.5]
+magC1.to_csv('magC1.csv', index=True)
+
+magC2 = pd.DataFrame()
+magC2['mag'] = magC['mag']
+magC2 = magC[magC2['mag'] > 3.5]
+magC2.to_csv('magC2.csv', index=True)
+
+#---------------------------------------------#
+
 magNC = pd.DataFrame()
-
-magC['effectif'] = coastal['mag'].value_counts()
 magNC['effectif'] = non_coastal['mag'].value_counts()
-
-magC = magC[magC.index >= 0]
 magNC = magNC[magNC.index >= 0]
-
-#sort by index
-magC = magC.sort_index()
 magNC = magNC.sort_index()
-
+magNC['Pays_Cotier'] = 'non'
+magNC.to_csv('magNC.csv', index=True)
 # print("magC : ",magC)
 # print("magNC : ",magNC)
 
-magC['Pays_Cotier'] = 'oui'
-magNC['Pays_Cotier'] = 'non'
+#---------------------------------------------#
 
 mag = pd.concat([magC, magNC])
 
 # print("mag : ",mag)
 
-magC.to_csv('magC.csv', index=True)
-magNC.to_csv('magNC.csv', index=True)
+
 mag.to_csv('mag.csv', index=True)
 
 #---------------------------------------------#
@@ -322,6 +357,6 @@ calMag = pd.DataFrame()
 calMag['effectif'] = df[df['pays'] == 'California']['mag'].value_counts()
 calMag = calMag.sort_index()
 
-print("calMag : ",calMag)
+# print("calMag : ",calMag)
 
 calMag.to_csv('calMag.csv', index=True)
