@@ -293,16 +293,24 @@ magNC = magNC[magNC.index >= 0]
 magC = magC.sort_index()
 magNC = magNC.sort_index()
 
-print("magC : ",magC)
-print("magNC : ",magNC)
+# print("magC : ",magC)
+# print("magNC : ",magNC)
 
 magC['Pays_Cotier'] = 'oui'
 magNC['Pays_Cotier'] = 'non'
 
 mag = pd.concat([magC, magNC])
 
-print("mag : ",mag)
+# print("mag : ",mag)
 
 magC.to_csv('magC.csv', index=True)
 magNC.to_csv('magNC.csv', index=True)
 mag.to_csv('mag.csv', index=True)
+
+japanMag = df[df['pays'] == 'Japan']['mag'].value_counts()
+japanMag = japanMag[japanMag.index >= 0]
+japanMag = japanMag.sort_index()
+
+# print("japanMag : ",japanMag)
+
+japanMag.to_csv('japanMag.csv', index=True)
