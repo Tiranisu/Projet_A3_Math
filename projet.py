@@ -307,10 +307,21 @@ magC.to_csv('magC.csv', index=True)
 magNC.to_csv('magNC.csv', index=True)
 mag.to_csv('mag.csv', index=True)
 
-japanMag = df[df['pays'] == 'Japan']['mag'].value_counts()
-japanMag = japanMag[japanMag.index >= 0]
+#---------------------------------------------#
+
+japanMag = pd.DataFrame()
+japanMag['effectif'] = df[df['pays'] == 'Japan']['mag'].value_counts()
 japanMag = japanMag.sort_index()
 
 # print("japanMag : ",japanMag)
 
 japanMag.to_csv('japanMag.csv', index=True)
+
+#---------------------------------------------#
+calMag = pd.DataFrame()
+calMag['effectif'] = df[df['pays'] == 'California']['mag'].value_counts()
+calMag = calMag.sort_index()
+
+print("calMag : ",calMag)
+
+calMag.to_csv('calMag.csv', index=True)
